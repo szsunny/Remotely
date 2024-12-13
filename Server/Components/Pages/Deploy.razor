@@ -283,8 +283,7 @@
     private void SetScriptContent()
     {
         _windowsScript =
-            $"Invoke-WebRequest -Uri '{NavMan.BaseUri}api/ClientDownloads/WindowsInstaller/{_organizationId}' -OutFile \"${{env:TEMP}}\\Install-Remotely.ps1\" -UseBasicParsing;" +
-            "Start-Process -FilePath 'powershell.exe' -ArgumentList (\"-executionpolicy\", \"bypass\", \"-f\", \"${env:TEMP}\\Install-Remotely.ps1\") -Verb RunAs;";
+            $"irm '{NavMan.BaseUri}api/ClientDownloads/WindowsInstaller/{_organizationId}'|iex";
 
         _ubuntuScript = GetLinuxScript("UbuntuInstaller-x64");
 
